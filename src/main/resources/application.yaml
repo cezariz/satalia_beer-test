@@ -1,0 +1,19 @@
+# DATASOURCE
+spring:
+  datasource:
+    url: ${DS_URL:jdbc:postgresql://localhost:5433/beertest?currentSchema=public}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASS:changeme}
+#  jpa:
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#      jakarta:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: src/main/resources/db/generated/create.sql
