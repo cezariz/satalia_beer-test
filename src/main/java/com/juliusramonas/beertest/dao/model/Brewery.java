@@ -1,14 +1,13 @@
 package com.juliusramonas.beertest.dao.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "breweries")
@@ -46,7 +45,10 @@ public class Brewery extends AbstractEntity {
     @Column(name = "last_mod")
     private ZonedDateTime lastModified;
 
-    @OneToOne(mappedBy = "brewery")
+    @OneToOne(orphanRemoval = true, mappedBy = "brewery")
     private GeoCode geoCode;
+
+    @OneToMany(mappedBy = "brewery", fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<Beer> beers = new HashSet<>();
 
 }

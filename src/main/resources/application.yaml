@@ -1,15 +1,15 @@
 # DATASOURCE
 spring:
   datasource:
-    url: ${DS_URL:jdbc:postgresql://localhost:5433/beertest?currentSchema=public}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5433/beertest?currentSchema=public}
     driver-class-name: org.postgresql.Driver
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASS:changeme}
-#  jpa:
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 #      jakarta:
 #        persistence:
 #          schema-generation:
@@ -17,3 +17,11 @@ spring:
 #            scripts:
 #              action: create
 #              create-target: src/main/resources/db/generated/create.sql
+
+waypoint:
+  maxDistance: ${MAX_DISTANCE:2000} # max distance in km
+  maxTourSize: ${MAX_TOUR_SIZE :1000}
+  closestPointLimit: ${CLOSEST_POINT_LIMIT:3}
+
+aspect:
+  enabled: true

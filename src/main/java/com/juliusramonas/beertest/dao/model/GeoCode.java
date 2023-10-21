@@ -4,25 +4,25 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
+import lombok.ToString;
 
 @Entity
 @Table(name = "geocodes")
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = "brewery", callSuper = true)
 @NoArgsConstructor
 @Data
+@ToString(exclude = "brewery", callSuper = true)
 public class GeoCode extends AbstractEntity {
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "brewery_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brewery_id")
     private Brewery brewery;
 
     @Column(columnDefinition = "numeric(17,14)")
-    private BigDecimal latitude;
+    private Double latitude;
 
     @Column(columnDefinition = "numeric(18,14)")
-    private BigDecimal longitude;
+    private Double longitude;
 
     private String accuracy;
 
