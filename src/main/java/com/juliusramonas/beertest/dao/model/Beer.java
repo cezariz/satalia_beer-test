@@ -1,23 +1,20 @@
 package com.juliusramonas.beertest.dao.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "beers")
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = "brewery", callSuper = true)
 @NoArgsConstructor
 @Data
+@ToString(exclude = "brewery", callSuper = true)
 public class Beer extends AbstractEntity {
-
-    @Column(name = "brewery_id")
-    private Long breweryId;
 
     private String name;
 
@@ -45,5 +42,9 @@ public class Beer extends AbstractEntity {
 
     @Column(name = "last_mod")
     private ZonedDateTime lastModified;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brewery_id")
+    private Brewery brewery;
 
 }
