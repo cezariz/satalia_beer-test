@@ -6,5 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public record WaypointsConfigurationProperties(
         double maxDistance,
         int maxTourSize,
-        int closestPointLimit
+        int closestPointLimit,
+        int mostBeersLimit
 ) {}

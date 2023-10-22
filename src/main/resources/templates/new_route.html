@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Initial View</title>
+    <link th:href="@{/styles/css/main.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<form th:action="@{/results}" th:object="${locationForm}" accept-charset="UTF-8" method="post" class="location-form">
+    <div class="header center">
+        <span>Beer Test</span>
+    </div>
+
+    <p>Enter latitude and longitude to calculate best route and discover how many different kinds of beer you would collect with our brand-new helicopter that can travel 2000 km!</p>
+
+    <div class="input-wrapper">
+        <input type="text" th:field="*{latitude}" placeholder="Latitude">
+        <span th:if="${#fields.hasErrors('latitude')}" th:errors="*{latitude}" class="error"></span>
+    </div>
+
+    <div class="input-wrapper">
+        <input type="text" th:field="*{longitude}" placeholder="Longitude">
+        <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{longitude}" class="error"></span>
+    </div>
+
+    <div class="submit-btn">
+        <input type="submit" value="Find best route">
+    </div>
+</form>
+
+</body>
+</html>
