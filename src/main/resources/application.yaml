@@ -1,3 +1,8 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /beer-test
+
 # DATASOURCE
 spring:
   datasource:
@@ -10,18 +15,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
-#      jakarta:
-#        persistence:
-#          schema-generation:
-#            create-source: metadata
-#            scripts:
-#              action: create
-#              create-target: src/main/resources/db/generated/create.sql
 
 waypoint:
   maxDistance: ${MAX_DISTANCE:2000} # max distance in km
-  maxTourSize: ${MAX_TOUR_SIZE :1000}
-  closestPointLimit: ${CLOSEST_POINT_LIMIT:3}
+  maxTourSize: ${MAX_TOUR_SIZE :10000}
+  closestPointLimit: ${CLOSEST_POINT_LIMIT:10}
+  mostBeersLimit: ${MOST_BEERS_LIMIT:10}
 
 aspect:
   enabled: true

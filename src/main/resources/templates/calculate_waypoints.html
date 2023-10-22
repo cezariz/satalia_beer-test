@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Initial View</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link th:href="@{/styles/css/main.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="results-container">
+  <p>This trip would yield <span th:text="${totalBeers}"></span> beers.</p>
+  <div id="map"></div>
+  <button class="btn-back" onclick="window.history.back();">Go Back</button>
+</div>
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  const waypoints = /*[[${waypoints}]]*/ [];
+  /*]]>*/
+</script>
+<script th:src="@{js/results.js}"></script>
+
+</body>
+</html>

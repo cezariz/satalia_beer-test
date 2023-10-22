@@ -12,3 +12,22 @@ services:
       POSTGRES_DB: beertest
     volumes:
       - ../src/main/resources/beer-data:/tmp/
+
+  beer-test-app:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      # DB variables
+      DATABASE_URL: jdbc:postgresql://postgres:5432/beertest?currentSchema=public
+      DB_USERNAME: postgres
+      DB_PASS: changeme
+      # APP variables
+      MAX_DISTANCE: 2000
+      MAX_TOUR_SIZE: 10000
+      CLOSEST_POINT_LIMIT: 10
+      MOST_BEERS_LIMIT: 10
