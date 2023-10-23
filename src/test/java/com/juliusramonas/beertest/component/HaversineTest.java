@@ -1,39 +1,37 @@
 package com.juliusramonas.beertest.component;
 
-import com.juliusramonas.beertest.AbstractIntegrationTest;
-import com.juliusramonas.beertest.dao.GeoCodeRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.data.Percentage;
-import org.junit.jupiter.api.Disabled;
+import com.juliusramonas.beertest.service.model.Boundary;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
+@RunWith(SpringRunner.class)
+class HaversineTest {
 
-@Disabled
-@Slf4j
-class HaversineTest extends AbstractIntegrationTest {
-
-    @Autowired
-    GeoCodeRepository geoCodeRepository;
-
-    @Autowired
-    Haversine haversine;
+    private final Haversine haversine = new Haversine();
 
     @Test
     void given_theseCoordinates_whenCalculateDistance_thenThisResult() {
-        final var geoCode1 = geoCodeRepository.findById(1L)
-                                              .orElseThrow();
-        final var geoCode2 = geoCodeRepository.findById(2L)
-                                              .orElseThrow();
+        final SoftAssertions softAssertions = new SoftAssertions();
 
-        final var distanceInKm =
-                haversine.calculateDistance(geoCode1.getLatitude(), geoCode1.getLongitude(), geoCode2.getLatitude(),
-                        geoCode2.getLongitude());
+        final double expected = 2411.587840220508;
+        final var actual = haversine.calculateDistance(30.22340011596680, -97.76969909667969, 37.78250122070313,
+                -122.39299774169922);
 
-        log.info("Distance: %.2fkm".formatted(distanceInKm));
+        softAssertions.assertThat(actual).isEqualTo(expected);
+    }
 
-        assertThat(distanceInKm).isCloseTo(2411.587840220508, Percentage.withPercentage(1));
+    @Test
+    void givenGoodData_whenGetBoundaries_thenThisResultIsReturned() {
+        final SoftAssertions softAssertions = new SoftAssertions();
+
+        final var expected = new Boundary(39.23240912497581, 21.21439110695779, -87.36171892339303,
+                -108.17767926996635);
+
+        final var actual = haversine.getBoundaries(30.22340011596680, -97.76969909667969, 1000);
+        softAssertions.assertThat(actual)
+                .isEqualTo(expected);
     }
 
 }

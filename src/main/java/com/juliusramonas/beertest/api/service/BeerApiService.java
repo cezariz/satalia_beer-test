@@ -24,4 +24,11 @@ public class BeerApiService {
                 .toList();
     }
 
+    public List<WaypointWebDto> getBestRouteOptimized(final Double latitude, final Double longitude) {
+        final var route = waypointService.calculateWaypointsOptimized(latitude, longitude);
+        return route.stream()
+                .map(waypointMapper::mapDataToDto)
+                .toList();
+    }
+
 }

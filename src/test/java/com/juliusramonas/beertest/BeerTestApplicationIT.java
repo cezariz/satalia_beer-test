@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
-class BeerTestApplicationTests extends AbstractIntegrationTest {
+class BeerTestApplicationIT extends AbstractIT {
 
     @Autowired
     EntityManager em;
 
     @Test
     void initialDataLoaded() {
-        SoftAssertions softAssertions = new SoftAssertions();
+        final SoftAssertions softAssertions = new SoftAssertions();
         assertTableHasEntries(softAssertions, "beers");
         assertTableHasEntries(softAssertions, "breweries");
         assertTableHasEntries(softAssertions, "categories");
@@ -25,12 +25,12 @@ class BeerTestApplicationTests extends AbstractIntegrationTest {
     private void assertTableHasEntries(final SoftAssertions softAssertions, final String tableName) {
         final String query = "select count(*) from %s".formatted(tableName);
         final var totalEntries = em.createNativeQuery(query)
-                                   .getSingleResult();
+                .getSingleResult();
 
         log.info("%s has %s entries".formatted(tableName, totalEntries));
 
         softAssertions.assertThat(Integer.valueOf(totalEntries.toString()))
-                      .isGreaterThan(0);
+                .isGreaterThan(0);
     }
 
 }

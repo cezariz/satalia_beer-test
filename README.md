@@ -2,10 +2,15 @@
 
 ### Run
 ```bash
-./mvnw spring-boot:run
+docker-compose -f ./dev_tools/docker-compose.yaml up -d 
 ```
 
-### test
+### Run test
 ```bash
 ./mvnw test
+```
+
+### Run IT test
+```bash
+./mvnw verify
 ```

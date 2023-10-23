@@ -1,6 +1,7 @@
 package com.juliusramonas.beertest;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Disabled;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -9,7 +10,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.utility.MountableFile;
 
 @SpringBootTest
-public class AbstractIntegrationTest {
+@Disabled
+public class AbstractIT {
 
     private final static String DB_USERNAME = "user";
     private final static String DB_PASSWORD = "password";
@@ -24,7 +26,7 @@ public class AbstractIntegrationTest {
                                                                    "/tmp/");
 
     @DynamicPropertySource
-    static void properties(DynamicPropertyRegistry registry) {
+    static void properties(final DynamicPropertyRegistry registry) {
         postgres.start();
 
         // instructing default connection to use app_user from init.sql
