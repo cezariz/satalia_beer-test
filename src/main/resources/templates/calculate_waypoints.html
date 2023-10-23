@@ -13,9 +13,8 @@
 
 <div class="results-container">
   <p class="results__message_box">
-    Visiting all the breweries on this trip would net you <span th:text="${totalBeers}"/> beers in
-    total. <br/>
-    Calculations took <span th:text="${timeTaken}"/> milliSeconds.
+    Visiting all <b><span th:text="${waypoints.size()}"/></b> breweries on this trip would net you <b><span th:text="${totalBeers}"/></b> beers in total. <br/>
+    Calculations took <b><span th:text="${timeTaken}"/></b> milliSeconds.
   </p>
   <div id="map"></div>
   <button class="btn-back" onclick="window.history.back();">Go Back</button>
