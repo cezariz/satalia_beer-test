@@ -12,8 +12,9 @@
 <body>
 
 <div class="results-container">
-  <p>
-    This trip yields <span th:text="${totalBeers}"/> beers in total.<br/>
+  <p class="results__message_box">
+    Visiting all the breweries on this trip would net you <span th:text="${totalBeers}"/> beers in
+    total. <br/>
     Calculations took <span th:text="${timeTaken}"/> milliSeconds.
   </p>
   <div id="map"></div>
