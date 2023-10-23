@@ -1,8 +1,5 @@
 # Satalia backend homework - Beer Test
 
-![alt text](new_trip.png)
-![alt text](results.png)
-
 ### Run
 ```bash
 docker-compose -f ./dev_tools/docker-compose.yaml up -d 
@@ -20,3 +17,7 @@ docker-compose -f ./dev_tools/docker-compose.yaml up -d
 ```bash
 ./mvnw verify
 ```
+### GUI Images
+![alt text](new_trip.png)
+![alt text](results.png)
+
