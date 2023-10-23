@@ -12,5 +12,6 @@ public record LocationForm(
         @NotNull(message = "Longitude is required.")
         @Digits(integer = 18, fraction = 14,
                 message = "Longitude can have up to 18 digits before the decimal and 14 digits after.")
-        Double longitude
+        Double longitude,
+        boolean optimize
 ) {}

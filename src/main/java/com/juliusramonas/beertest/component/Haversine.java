@@ -9,9 +9,7 @@ public class Haversine {
     private static final int EARTH_RADIUS = 6371;
     private static final double LAT_DISTANCE = 111; // Roughly 111 km per latitude degree.
 
-    //    @TrackExecutionTime
     public double calculateDistance(double startLat, final double startLong, double endLat, final double endLong) {
-
         final double dLat = Math.toRadians((endLat - startLat));
         final double dLong = Math.toRadians((endLong - startLong));
 

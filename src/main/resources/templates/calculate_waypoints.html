@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <title>Initial View</title>
+  <title>beer-test/results</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -12,7 +12,10 @@
 <body>
 
 <div class="results-container">
-  <p>This trip would yield <span th:text="${totalBeers}"></span> beers.</p>
+  <p>
+    This trip yields <span th:text="${totalBeers}"/> beers in total.<br/>
+    Calculations took <span th:text="${timeTaken}"/> milliSeconds.
+  </p>
   <div id="map"></div>
   <button class="btn-back" onclick="window.history.back();">Go Back</button>
 </div>

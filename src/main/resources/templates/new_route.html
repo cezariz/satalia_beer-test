@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Initial View</title>
+    <title>beer-test</title>
     <link th:href="@{/styles/css/main.css}" rel="stylesheet"/>
 </head>
 <body>
 
-<form th:action="@{/results}" th:object="${locationForm}" accept-charset="UTF-8" method="post" class="location-form">
+<form th:action="@{/beer-test/results}" th:object="${locationForm}" accept-charset="UTF-8" method="post" class="location-form">
     <div class="header center">
         <span>Beer Test</span>
     </div>
 
-    <p>Enter latitude and longitude to calculate best route and discover how many different kinds of beer you would collect with our brand-new helicopter that can travel 2000 km!</p>
+    <p>Input your latitude and longitude to determine the optimal route. Discover the variety of beers you can gather using our helicopter with a range of <b>2000 km</b>!</p>
 
     <div class="input-wrapper">
         <input type="text" th:field="*{latitude}" placeholder="Latitude">
@@ -24,9 +24,15 @@
         <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{longitude}" class="error"></span>
     </div>
 
-    <div class="submit-btn">
-        <input type="submit" value="Find best route">
+    <div class="row">
+        <input name="optimize" type="checkbox" th:field="*{optimize}"/>
+        <label th:for="optimize">Use optimized algorithm</label>
     </div>
+
+    <div class="submit-btn">
+        <input type="submit" value="Calculate">
+    </div>
+
 </form>
 
 </body>

@@ -6,8 +6,11 @@ import com.juliusramonas.beertest.service.model.WaypointData;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = BreweryDataMapper.class)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = BreweryDataMapper.class,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface WaypointDataMapper {
 
     @Mapping(target = "lat", source = "point.lat")
