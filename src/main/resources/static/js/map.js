@@ -1,3 +1,21 @@
+const homeIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+const breweryIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 function createPopUp(waypoint, index) {
   if (index == 0) return;
   if (!waypoint.brewery) {
@@ -29,9 +47,9 @@ function createPopUp(waypoint, index) {
     <div style="max-height: 300px; overflow: scroll; font-family: Arial, sans-serif; padding: 8px;">
         <strong>${index} - ${waypoint.brewery.name}</strong>
         <br />
-        Distance traveled: <span style="color: #007BFF;">${waypoint.distanceTraveled} km</span>
+        Distance traveled: <span style="color: #007BFF;">${roundNumber(waypoint.distanceTraveled)} km</span>
         <br />
-        Distance to previous waypoint: <span style="color: #007BFF;">${waypoint.distanceToPreviousPoint} km</span>
+        Distance to next waypoint: <span style="color: #007BFF;">${roundNumber(waypoints[index + 1].distanceToPreviousPoint)} km</span>
         <br /><br />
         ${beers}
     </div>
@@ -40,32 +58,21 @@ function createPopUp(waypoint, index) {
   return popUp;
 }
 
-const homeIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
+const roundNumber = (num) => {
+  return Math.round(num * 100) / 100;
+}
 
-const breweryIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
-
+// init map object
 const map = L.map('map').setView([51.505, -0.09], 13);
 
+// add map layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
 const latlngs = [];
 
+// create points and popups
 for (var idx = 0; idx < waypoints.length; idx++) {
   if (waypoints[idx].lat && waypoints[idx].lon) {
     latlngs.push([waypoints[idx].lat, waypoints[idx].lon]);
@@ -78,6 +85,8 @@ for (var idx = 0; idx < waypoints.length; idx++) {
   }
 }
 
+// create line
 const polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
 
+// focous map to fit line
 map.fitBounds(polyline.getBounds());
