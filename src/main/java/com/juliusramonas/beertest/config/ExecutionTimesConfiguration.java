@@ -1,4 +1,4 @@
-package com.juliusramonas.beertest.config.properties;
+package com.juliusramonas.beertest.config;
 
 import com.juliusramonas.beertest.component.advice.MethodExecutionDurations;
 import org.springframework.context.annotation.Bean;
