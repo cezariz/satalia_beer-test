@@ -1,4 +1,4 @@
-# Satalia backend homework - Beer Test
+# Satalia homework - Beer Test
 
 ### Run
 ```bash
